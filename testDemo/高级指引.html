@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <script src="../build/react.development.js"></script>
+    <script src="../build/react-dom.development.js"></script>
+    <script src="../build/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+    <script type="text/babel">
+
+      // 1 Context
+      // desc: 无需为多层组件手动添加props 解决组件之间的深层传递
+      
+      // 2 错误边界
+      // desc：优雅的处理错误方式 部分UI的Javascript错误不应该导致整个应用崩溃， 为了解决这个问题
+
+      // refs转发
+      // desc: Ref 转发是一项将 ref 自动地通过组件传递到其一子组件的技巧。对于大多数应用中的组件来说，这通常不是必需的。但其对某些组件，尤其是可重用的组件库是很有用的。最常见的案例如下所述。
+
+      // Fragments
+      // desc: 解决 React 组件返回多个元素 也可以可以使用[]来解决
+
+      // Portals
+      // desc: Portal 提供了一种将子节点渲染到存在于父组件以外的 DOM 节点的优秀的方案。
+      // code: render() {
+      //         React 并*没有*创建一个新的 div。它只是把子元素渲染到 `domNode` 中。
+      //         `domNode` 是一个可以在任何位置的有效 DOM 节点。
+      //          return ReactDOM.createPortal(
+      //             this.props.children,
+      //             domNode
+      //           );
+      //        }
+
+      // props
+      // desc: 传参 可以添加反向数据流来解决子传递父组件问题
+
+      // Refs and the DOM
+      // desc: 在react数据流中 props是父组件和子组件交互的唯一方式，要修改子组件，你需要使用新的props来重写渲染它们 ref有回调函数方式 字符串方式
+      
+      // Render Props
+      // desc: 是指一种在 React 组件之间使用一个值为函数的 prop 共享代码的简单技术 使用库React-router
+      
+      // 静态类型检查
+      // desc: 像 Flow 和 TypeScript 等这些静态类型检查器，可以在运行前识别某些类型的问题。他们还可以通过增加自动补全等功能来改善开发者的工作流程。出于这个原因，我们建议在大型代码库中使用 Flow 或 TypeScript 来代替 PropTypes。
+      
+      // 使用 PropTypes 进行类型检查
+      // desc: 检查props传递验证参数类型是否合法
+
+      // 非受控组件：另一种替代方案是使用非受控组件，这时表单数据将交由 DOM 节点来处理 而不是为每个状态更新都编写数据处理函数，你可以 使用 ref 来从 DOM 节点中获取表单数据
+      // 受控组件: 通常自己维护 state，并根据用户输入进行更新。而在 React 中，可变状态（mutable state）通常保存在组件的 state 属性中，并且只能通过使用 setState()来更新
+      
+    </script>
+    
+  </body>
+</html>
