@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <script src="../build/react.development.js"></script>
+    <script src="../build/react-dom.development.js"></script>
+    <script src="../build/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+    <script type="text/babel">
+    
+    // 非受控组件
+    class From extends React.Component {
+      constructor(props) {
+        super(props)
+        this.handleSubmit = this.handleSubmit.bind(this)
+        this.input = React.createRef()
+        this.inputs = React.createRef()
+      }
+      handleSubmit(event) {
+        alert('A name was submitted: ' + this.input.current.value);
+        alert('A age was submitted: ' + this.inputs.current.value);
+        event.preventDefault();
+      }
+      render() {
+        // defaultValue 设置默认值 但是不去控制后续的更新
+        return (
+          <form onSubmit={this.handleSubmit}>
+            <label>
+              姓名
+              </label>
+            <input type="text" defaultValue="Bob" ref={this.input}/>
+            <label>
+              年龄
+              </label>
+            <input type="text" defaultValue="10" ref={this.inputs}/>
+            <input type="submit" value="Submit" />
+          </form>
+        )
+      }
+    }
+
+    class Page extends React.Component {
+      constructor(props) {
+        super(props)
+      }
+      render() {
+        return (
+          <div>
+            <h1>非受控组件</h1>
+            <From/>
+          </div>
+        )
+      }
+    }
+
+    ReactDOM.render(
+      <Page />,
+      document.getElementById('example')
+    );
+    </script>
+  </body>
+</html>

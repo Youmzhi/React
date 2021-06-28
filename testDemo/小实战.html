@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <script src="../build/react.development.js"></script>
+    <script src="../build/react-dom.development.js"></script>
+    <script src="../build/babel.min.js"></script>
+    <style>
+      .del {
+        text-decoration: line-through;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="example"></div>
+    <script type="text/babel">
+    // jsx允许嵌入任何表达式 jsx不支持if 和 for
+    class Button extends React.Component {
+      constructor(props) {
+        super(props)
+        this.HandleClick = this.HandleClick.bind(this)
+      }
+      HandleClick() {
+        console.log(this.props)
+        if (!this.props.buttonEvent) return
+        this.props.buttonEvent()
+      }
+      render() {
+        return <button onClick={this.HandleClick}>{this.props.text}</button>
+      }
+    }
+    // 添加框
+    class AddInput extends React.Component {
+      constructor(props) {
+        super(props)
+        this.state = {
+          inputValue: props.inputText
+        }
+        this.HandleClick = this.HandleClick.bind(this)
+        this.HandleChange = this.HandleChange.bind(this)
+      }
+      HandleClick() {
+        this.props.addChange(this.state.inputValue)
+      }
+      HandleChange(e) {
+        this.setState({
+          inputValue: e.target.value
+        })
+      }
+      render() {
+        return (
+          <div>
+            <input value={this.state.inputValue} type="text" onChange={this.HandleChange}/> <Button buttonEvent={this.HandleClick} text="添加"/>
+          </div>
+        )
+      }
+    }
+
+    let colors = {
+      red: 'red'
+    }
+    // 学习列表 
+    class TabList extends React.Component {
+      constructor(props) {
+        super(props)
+      }
+      HandleOver(index, bool) {
+        console.log(index)
+        this.props.finishChange(index, bool)
+      }
+      HandleDel(index) {
+        console.log(index) 
+        this.props.delChange(index)
+      }
+      render() {
+        let btntext
+        
+        return (
+          <ul>
+            {
+              this.props.list.map((v, i)=>{
+                return (
+                  <li key={i}>
+                    <p className={ v.finish ? 'del':''} style={{fontSize:20,color: colors.red}}>
+                      {v.name}
+                    </p>
+                    
+                    { 
+                      v.finish ? <Button buttonEvent={this.HandleOver.bind(this, i, false)} text="已完成"></Button> : <Button buttonEvent={this.HandleOver.bind(this, i, true)} text="未完成"></Button>
+                    }
+                    
+                    <Button buttonEvent={this.HandleDel.bind(this, i)} text="删除"></Button>
+                  </li>
+                )
+                
+              })
+            }
+            
+          </ul>
+        )
+      }
+    }
+
+    
+    // 主入口
+    class Page extends React.Component {
+      constructor(props) {
+        super(props)
+        this.state = {
+          inputText: '',
+          list: [
+            {
+              name: '学react',
+              finish: false
+            }
+          ]
+        }
+        this.addList = this.addList.bind(this)
+        this.finishChange = this.finishChange.bind(this)
+        this.delChange = this.delChange.bind(this)
+      }
+      addList(val) {
+        console.log(val)
+        const newData = this.state.list.concat({ name: val, finish: false })
+        this.setState({
+          list: newData
+        })
+      }
+      finishChange(index, bool) {
+        let list = this.state.list
+        list[index].finish = bool
+        this.setState({
+          list: list
+        })
+      }
+      delChange(index) {
+        let list = this.state.list
+        list.splice(index, 1)
+        this.setState({
+          list: list
+        })
+      }
+      render() {
+        return (
+          <div>
+            <AddInput addChange={this.addList}  inputText={this.state.inputText} />
+            <TabList finishChange={this.finishChange} delChange={this.delChange} list={this.state.list}/>
+          </div>
+        )
+      }
+    }
+
+    ReactDOM.render(
+      <Page />,
+      document.getElementById('example')
+    )
+    </script>
+  </body>
+</html>

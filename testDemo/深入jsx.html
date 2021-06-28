@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <script src="../build/react.development.js"></script>
+    <script src="../build/react-dom.development.js"></script>
+    <script src="../build/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+    <script type="text/babel">
+    //  React.Fragment 处理包裹标签问题
+    class Child extends React.Component {
+      constructor(props) {
+        super(props)
+      }
+      render() {
+        return (
+          <React.Fragment>
+            <td>Hello</td>
+            <td>World</td>
+          </React.Fragment>
+        )
+      }
+    }
+    
+    // jsx深入返回数组
+    class Page extends React.Component {
+      constructor(props) {
+        super(props);
+      }
+
+      render() {
+        return [
+          <li key="A">First item</li>,
+          <li key="B">Second item</li>,
+          <li key="C">Third item</li>,
+          <table key="d">
+            <tbody>
+              <tr>
+                <Child />
+              </tr>
+            </tbody>
+          </table>
+        ];
+      }
+    }
+
+    ReactDOM.render(
+      <Page />,
+      document.getElementById('example')
+    );
+    </script>
+  </body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <script src="../build/react.development.js"></script>
+    <script src="../build/react-dom.development.js"></script>
+    <script src="../build/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+    <script type="text/babel">
+    
+    class Page extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          step: 1
+        }
+      }
+
+      // 三种状态
+      // Mounting：已插入真实 DOM
+      // Updating：正在被重新渲染
+      // Unmounting：已移出真实 DOM
+
+      // 两种特殊状态
+      // componentWillReceiveProps(object nextProps)：已加载组件收到新的参数时调用
+      // shouldComponentUpdate(object nextProps, object nextState)：组件判断是否重新渲染时调用
+
+      // 生命周期速查表 https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
+
+
+      // 挂载
+      // 1 constructor()
+      // 2 static getDerivedStateFromProps()
+      // 3 render()
+      // 1 componentDidMount()
+
+      // 更新
+      // 1 static getDerivedStateFromProps()
+      // 2 shouldComponentUpdate()
+      // 3 render()
+      // 4 getSnapshotBeforeUpdate()
+      // 5 componentDidUpdate()
+
+      // 卸载
+      // 1 componentWillUnmount()
+
+      // 错误处理
+      // 1 static getDerivedStateFromError()
+      // 2 componentDidCatch()
+
+
+      componentWillMount() {
+        console.log(this.state.step, 'componentWillMount')
+        // this.props 和 this.state 可能会异步更新 不要依赖他们的值来更新下一个状态
+        // 解决方法用箭头函数
+        this.setState((state, props) => ({
+          step: state.step++
+        }))
+      }
+
+      static getDerivedStateFromProps() {
+        
+      }
+
+      componentWillMount() {
+        console.log(this.state.step, 'componentWillMount')
+      }
+
+
+      
+      
+      render() {
+        return (
+          <div>
+            打开控制台查看生命周期
+          </div>
+        );
+      }
+    }
+
+    ReactDOM.render(
+      <Page />,
+      document.getElementById('example')
+    );
+    </script>
+  </body>
+</html>

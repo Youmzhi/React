@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <script src="../build/react.development.js"></script>
+    <script src="../build/react-dom.development.js"></script>
+    <script src="../build/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+    <script type="text/babel">
+
+    // getDerivedStateFromProps 的存在只有一个目的：让组件在 props 变化时更新 state。上一个 blog 展示了一些示例，比如 props 的 offset 变化时，修改当前的滚动方向和根据 props 变化加载外部数据。
+    
+    class Page extends React.Component {
+      constructor(props) {
+        super(props);
+      }
+
+      render() {
+        return (
+          <div>
+            <p>setState() 更新setState</p>
+            <p>forceUpdate() 强制更新</p>
+            <p>defaultProps() 默认props参数</p>
+          </div>
+        )
+      }
+    }
+
+    ReactDOM.render(
+      <Page />,
+      document.getElementById('example')
+    );
+    </script>
+  </body>
+</html>
