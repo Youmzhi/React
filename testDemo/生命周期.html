@@ -12,6 +12,7 @@
     
     class Page extends React.Component {
       constructor(props) {
+        console.log('sttup props and state----组件初始化阶段')
         super(props);
         this.state = {
           step: 1
@@ -52,7 +53,7 @@
 
 
       componentWillMount() {
-        console.log(this.state.step, 'componentWillMount')
+        console.log('componentWillMount----组件将要挂载到页面的时刻')
         // this.props 和 this.state 可能会异步更新 不要依赖他们的值来更新下一个状态
         // 解决方法用箭头函数
         this.setState((state, props) => ({
@@ -60,18 +61,21 @@
         }))
       }
 
+      
+
       static getDerivedStateFromProps() {
         
       }
 
-      componentWillMount() {
-        console.log(this.state.step, 'componentWillMount')
+      componentDidMount() {
+        console.log('componentDidMount------组件挂载完成时刻')
       }
 
 
       
       
       render() {
+        console.log('render----组件挂载中')
         return (
           <div>
             打开控制台查看生命周期
