@@ -42,7 +42,7 @@
       constructor(props) {
 	  		super(props)
         this.state = {
-          goods: [[]
+          goods: [
             { id: 1, name: '小白菜', price: 10 },
             { id: 2, name: '丝瓜', price: 10 },
             { id: 3, name: '南瓜', price: 10 }
@@ -53,8 +53,8 @@
         return (
           <ol>
             {
-              this.state.goods.map((v)=>{
-                return <GoodsItem item={v}></GoodsItem>
+              this.state.goods.map((v,i)=>{
+                return <GoodsItem item={v} key={i}></GoodsItem>
               })
             }
           </ol>
